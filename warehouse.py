@@ -1,12 +1,9 @@
+from decimal import Decimal
 import logging
 items = [{"name":"mleko","quantity":5,"unit":"l","price":3},
         {"name":"kawa","quantity":10,"unit":"kg","price":10},
         {"name":"cukier","quantity":3,"unit":"kg","price":2.5}]
 stock = []
-new_items = {}
-sell = {}
-for i in items:
-    pass
 def stock(items):
     print("Name\tQuantity\tUnit\tUnit Price (PLN)")
     for stuff in items:
@@ -16,13 +13,14 @@ def stock(items):
         price = (stuff["price"])
         print(name+str("\t\t%s" % quantity)+"\t\t%s" % unit+str("\t\t%s" % price))
 def add_items(items):
+        new_items = {}
         name = str(input("Nazwa:"))
         new_items["name"] = name
-        quantity = int(input("Ilość:"))
+        quantity = Decimal(input("Ilość:"))
         new_items["quantity"] = quantity
         unit = str(input("Jednostka:"))
         new_items["unit"] = unit
-        price = int(input("Cena:"))
+        price = Decimal(input("Cena:"))
         new_items["price"] = price
         for i in items:
             if i["name"] != new_items["name"]:
@@ -33,9 +31,10 @@ def add_items(items):
                 i["quantity"]=new_items["quantity"]+i["quantity"]
             break
 def sell_items(items):
+        sell = {}
         name = str(input("Nazwa:"))
         sell["name"] = name
-        quantity2 = int(input("Ilość:"))
+        quantity2 = Decimal(input("Ilość:"))
         sell["quantity"] = quantity2
         for i in items:
             if i["name"] == sell["name"]:
@@ -49,11 +48,9 @@ while True:
         print(stock(items))
     elif warehouse == "Add":
         pass
-    #print(items)
         add_items(items)
     elif warehouse == "Sell":
         pass
-    #print(items)
         sell_items(items)
     elif warehouse == "Exit":
         break
